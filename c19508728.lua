@@ -79,10 +79,9 @@ function c19508728.tdcost(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c19508728.tdop(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
-	local opt=Duel.SelectOption(tp,aux.Stringid(19508728,0),aux.Stringid(19508728,1))
-	e:SetLabel(opt)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,e:GetHandler(),1,0,0)
 	if e:GetHandler():IsRelateToEffect(e) then
-		Duel.SendtoDeck(e:GetHandler(),nil,e:GetLabel(),REASON_EFFECT)
+		local opt=Duel.SelectOption(tp,aux.Stringid(19508728,0),aux.Stringid(19508728,1))
+		Duel.SendtoDeck(e:GetHandler(),nil,opt,REASON_EFFECT)
 	end
 end
