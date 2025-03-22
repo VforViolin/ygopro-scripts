@@ -36,7 +36,11 @@ function s.initial_effect(c)
 end
 function s.stfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x1a8) and c:IsSSetable()
+<<<<<<< Updated upstream
 		and c.set_as_spell and c:IsFaceupEx()
+=======
+	and c.set_as_spell and (not c:IsLocation(LOCATION_MZONE) or c:IsFaceup())
+>>>>>>> Stashed changes
 end
 function s.sttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.stfilter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) end
@@ -45,6 +49,7 @@ function s.stop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local ct=math.min(Duel.GetLocationCount(tp,LOCATION_SZONE),2)
 	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.stfilter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_MZONE+LOCATION_GRAVE,0,1,ct,nil)
+<<<<<<< Updated upstream
 	Duel.SSet(tp,g)
 end
 function s.desfilter(c)
@@ -53,12 +58,26 @@ end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,LOCATION_SZONE,0,nil)
+=======
+	if g:GetCount()>0 then
+		Duel.SSet(tp,g)
+		Duel.ShuffleSetCard(g)
+	end
+end
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_SZONE,0,nil)
+>>>>>>> Stashed changes
 	if g:GetCount()>0 then
 		Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 	end
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
+<<<<<<< Updated upstream
 	local g=Duel.GetMatchingGroup(s.desfilter,tp,LOCATION_SZONE,0,nil)
+=======
+	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_SZONE,0,nil)
+>>>>>>> Stashed changes
 	if g:GetCount()>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 		local sg=g:Select(tp,1,2,nil)
@@ -89,4 +108,8 @@ function s.dmop(e,tp,eg,ep,ev,re,r,rp)
 	if ac:IsRelateToEffect(e) and ac:IsControler(1-tp) and ac:IsType(TYPE_MONSTER) then
 		Duel.Destroy(ac,REASON_EFFECT)
 	end
+<<<<<<< Updated upstream
 end
+=======
+end
+>>>>>>> Stashed changes

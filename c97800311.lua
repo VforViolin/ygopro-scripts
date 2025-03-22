@@ -50,7 +50,11 @@ function s.ffilter(c)
 	return aux.IsCodeListed(c,29762407)
 end
 function s.hspfilter(c,tp,sc)
+<<<<<<< Updated upstream
 	return c:IsFusionSetCard(0x1c8) and c:IsControler(tp) and c:IsReleasable(REASON_SPSUMMON)
+=======
+	return c:IsFusionSetCard(0x1c7) and c:IsControler(tp) and c:IsReleasable(REASON_SPSUMMON)
+>>>>>>> Stashed changes
 		and c:IsCanBeFusionMaterial(sc,SUMMON_TYPE_SPECIAL)
 end
 function s.hspchk(g,tp,sc)
@@ -78,7 +82,11 @@ function s.hspop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function s.setfilter(c)
+<<<<<<< Updated upstream
 	return c:IsSetCard(0x1c8) and c:IsType(TYPE_TRAP) and c:IsSSetable() and c:IsCanBeEffectTarget()
+=======
+	return c:IsSetCard(0x1c7) and c:IsType(TYPE_TRAP) and c:IsSSetable() and c:IsCanBeEffectTarget()
+>>>>>>> Stashed changes
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_GRAVE,0,nil)
@@ -99,7 +107,14 @@ function s.setop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 		tg=tg:Select(tp,ft,ft,nil)
 	end
+<<<<<<< Updated upstream
 	Duel.SSet(tp,tg)
+=======
+	if tg:GetCount()>0 then
+		Duel.SSet(tp,tg)
+		Duel.ShuffleSetCard(tg)
+	end
+>>>>>>> Stashed changes
 end
 function s.descon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:IsActiveType(TYPE_TRAP)
@@ -113,7 +128,14 @@ function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
+<<<<<<< Updated upstream
 	if tc:IsRelateToChain() then
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end
+=======
+	if tc:IsRelateToEffect(e) then
+		Duel.Destroy(tc,REASON_EFFECT)
+	end
+end
+>>>>>>> Stashed changes
